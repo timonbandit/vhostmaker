@@ -42,7 +42,7 @@ echo "server {
         access_log $fullpath/logs/access_log;
         error_log $fullpath/logs/error_log;
         root $fullpath/http;
-        index index.php;
+        index index.php index.html;
         charset utf-8;
     location / {
         try_files       \$uri \$uri/ @rewrite;

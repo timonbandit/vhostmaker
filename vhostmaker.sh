@@ -60,7 +60,7 @@ location ~ .(jpg|jpeg|gif|png|ico|css|pdf|ppt|txt|bmp|rtf|js)\$ {
             access_log off;
             expires 7d;
 }
-location ~ .(tpl|xml|log)\$ {
+location ~ .(*.tpl|*.xml|*.log)\$ {
                 deny all;
         }
 }

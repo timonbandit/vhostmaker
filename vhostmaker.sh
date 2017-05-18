@@ -51,19 +51,20 @@ echo "server {
         rewrite         ^/(.*)\$ /index.php?q=\$1;
     }
         location ~ \.php\$ {
-                fastcgi_pass  unix:/var/run/php5-fpm.sock;
+                fastcgi_pass  unix:/var/run/php7.0-fpm.sock;
                 fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
                 include fastcgi_params;
         }
 #static files caching
-location ~ .(jpg|jpeg|gif|png|ico|css|pdf|ppt|txt|bmp|rtf|js)\$ {
-            access_log off;
-            expires 7d;
-}
-location ~ .(*.tpl|*.xml|*.log)\$ {
-                deny all;
-        }
-}
+    location ~* ^.+\.(ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|rss|atom|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf|css|js|webp)$ {
+        access_log off;
+        log_not_found off;
+	      expires 8d;
+    }
+
+    location = /robots.txt { access_log off; log_not_found off; }
+    location ~ /\. { deny  all; access_log off; log_not_found off; }
+
 " > $configname
 
 echo "Nginx config ready"

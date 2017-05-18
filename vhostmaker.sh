@@ -64,7 +64,7 @@ echo "server {
 
     location = /robots.txt { access_log off; log_not_found off; }
     location ~ /\. { deny  all; access_log off; log_not_found off; }
-
+}
 " > $configname
 
 echo "Nginx config ready"

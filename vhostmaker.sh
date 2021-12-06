@@ -16,8 +16,14 @@ if [ "$EUID" -ne 0 ]
   then echo "Please run me as root"
   exit
 fi
+
+#check if php-fpm is installed
+if dpkg --list | grep -e 'php.*fpm' > /dev/null; then
+	echo 'Exit because php-fpm not installed'
+	exit
+fi
 #Search php sock
-PHP_Sock=$(ls /var/run/php/*.sock | head -1)
+PHP_SOCK=$(ls /var/run/php/*.sock | head -1)
 
 #Get user input
 read -p "Enter WebSite Name (example.local): " site_name

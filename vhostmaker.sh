@@ -19,7 +19,7 @@ fi
 
 #Search php sock
 PHP_SOCK=$(ls /var/run/php/*.sock | head -1)
-if [ "" == "" ]; then
+if [ "$PHP_SOCK" == "" ]; then
 	echo "No php-fpm.sock is found"
 	exit
 fi

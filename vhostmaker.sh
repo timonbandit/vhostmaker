@@ -58,7 +58,7 @@ echo "server {
         rewrite         ^/(.*)\$ /index.php?q=\$1;
     }
         location ~ \.php\$ {
-                fastcgi_pass  unix:$PHP_Sock;
+                fastcgi_pass  unix:$PHP_SOCK;
                 fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
                 include fastcgi_params;
         }

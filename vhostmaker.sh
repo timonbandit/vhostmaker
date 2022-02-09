@@ -17,6 +17,13 @@ if [ "$EUID" -ne 0 ]
   exit
 fi
 
+#Search php sock
+PHP_SOCK=$(ls /var/run/php/*.sock | head -1)
+if [ "$PHP_SOCK" == "" ]; then
+	echo "No php-fpm.sock is found"
+	exit
+fi
+
 #Get user input
 read -p "Enter WebSite Name (example.local): " site_name
 read -p "Enter WebSite folder (example): " catalog
@@ -51,7 +58,7 @@ echo "server {
         rewrite         ^/(.*)\$ /index.php?q=\$1;
     }
         location ~ \.php\$ {
-                fastcgi_pass  unix:/var/run/php/php7.2-fpm.sock;
+                fastcgi_pass  unix:$PHP_SOCK;
                 fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
                 include fastcgi_params;
         }
